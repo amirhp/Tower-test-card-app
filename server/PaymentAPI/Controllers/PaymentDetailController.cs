@@ -14,9 +14,9 @@ namespace PaymentAPI.Controllers
     [AllowAnonymous]
     public class PaymentDetailController : ControllerBase
     {
-        private readonly PaymentDetailService _paymentService;
+        private readonly IPaymentDetailService _paymentService;
 
-        public PaymentDetailController(PaymentDetailService paymentService)
+        public PaymentDetailController(IPaymentDetailService paymentService)
         {
             _paymentService = paymentService;
         }
@@ -53,15 +53,15 @@ namespace PaymentAPI.Controllers
             {
                 return BadRequest();
             }
-            if (PaymentDetail.IsCreditCardCardNoValid(paymentDetail.CardNumber))
+            if (!PaymentDetail.IsCreditCardCardNoValid(paymentDetail.CardNumber))
             {
                 ModelState.AddModelError("CardNumber","Card Number is not valid!");
             }
-            if (PaymentDetail.IsCreditCardExpiryDateValid(paymentDetail.ExpirationDate))
+            if (!PaymentDetail.IsCreditCardExpiryDateValid(paymentDetail.ExpirationDate))
             {
                 ModelState.AddModelError("ExpirationDate", "Expiry Date is not valid!");
             }
-            if (PaymentDetail.IsCreditCardCVVInfoValid(paymentDetail.CVVCode))
+            if (!PaymentDetail.IsCreditCardCVVInfoValid(paymentDetail.CVVCode))
             {
                 ModelState.AddModelError("CVV", "CVV is not valid!");
             }

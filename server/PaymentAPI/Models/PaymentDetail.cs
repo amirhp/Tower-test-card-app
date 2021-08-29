@@ -21,7 +21,7 @@ namespace PaymentAPI.Models
 
         [Column(TypeName = "nvarchar(3)")]
         [Required]
-        public string CVCCode { get; set; }
+        public string CVVCode { get; set; }
 
 
         public static bool IsCreditCardCardNoValid(string cardNo)
@@ -34,13 +34,13 @@ namespace PaymentAPI.Models
         public static bool IsCreditCardExpiryDateValid(string expiryDate)
         {
             var monthCheck = new Regex(@"^(0[1-9]|1[0-2])$");
-            var yearCheck = new Regex(@"^20[0-9]{2}$");
+            var yearCheck = new Regex(@"^[0-9]{2}$");
 
-            var dateParts = expiryDate.Split('/'); //expiry date in from MM/yyyy            
+            var dateParts = expiryDate.Split('/'); //expiry date in from MM/yy            
             if (!monthCheck.IsMatch(dateParts[0]) || !yearCheck.IsMatch(dateParts[1])) // <3 - 6>
-                return false; // ^ check date format is valid as "MM/yyyy"
+                return false; // ^ check date format is valid as "MM/yy"
 
-            var year = int.Parse(dateParts[1]);
+            var year = 2000 + int.Parse(dateParts[1]);
             var month = int.Parse(dateParts[0]);
             var lastDateOfExpiryMonth = DateTime.DaysInMonth(year, month); //get actual expiry date
             var cardExpiry = new DateTime(year, month, lastDateOfExpiryMonth, 23, 59, 59);
