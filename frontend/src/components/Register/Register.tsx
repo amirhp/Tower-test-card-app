@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import { Paper, Grid, Typography, Button } from '@material-ui/core'
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles'
-import { CreditCard as CreditCardIcon } from '@material-ui/icons'
+import CreditCardNumberTextBox from './CardNumberTextBox'
+import CVCNumberTextBox from './CvcNumberTextBox'
+import ExpiryDateTextBox from './ExpiryDateTextBox'
+
 import CreditCard from '../../models/CreaditCard'
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -93,38 +96,35 @@ const Register: React.FC<RegisterProps> = ({
           alignItems="center"
           spacing={2}
         >
-          <Grid item xs={12} xl={10} sm={8} md={6} lg={4}>
+          <Grid item xs={12} xl={10} sm={8} md={6} lg={8}>
             <form className={classes.form}  onSubmit={onSubmit} data-testid="form">
               <div className={classes.textField}>
-              <span>Card Number</span>
-                <input
-                  value={cardNumber}
+               <CreditCardNumberTextBox
+                  cardNumber={cardNumber}
+                  onCardNumberChange={onCardNumberChange}
                 />
-            
-                {/* CardNumberTextBox */}
+                 
+                
               </div>
               <div className={classes.textField}>
                 <Grid
                   container
                   direction="row"
-                  justify="flex-end"
+                  justify="flex-start"
                   alignItems="center"
                   spacing={2}
                 >
                   <Grid item xs={6} xl={5} sm={4} md={3} lg={4}>
-                    {/* CvcNumberTextBox */}
-                    <span>CVC</span>
-                    <input
-                      value={cvcNumber}
-                    />
+                  <CVCNumberTextBox
+                  cvcNumber={cvcNumber}
+                  onCvcNumberChange={onCvcNumberChange}
+                />
                   </Grid>
                   <Grid item xs={6} xl={5} sm={4} md={3} lg={4}>
-                  {/* ExpiryDateTextBox */}
-                  <span>Card Number</span>
-                  <input
-                      value={cardNumber}
-                    />
-                   
+                  <ExpiryDateTextBox
+                  expiryDate={expiryDate}
+                  onExpiryDateChange={onExpiryDateChange}
+                />
                   </Grid>
                 </Grid>
               </div>
@@ -135,6 +135,7 @@ const Register: React.FC<RegisterProps> = ({
                   variant="contained"
                   color="primary"
                   type="submit"
+                  data-testid="submit"
                 >
                   Pay
                 </Button>
