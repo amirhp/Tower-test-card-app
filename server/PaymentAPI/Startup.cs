@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PaymentAPI.Service;
 
 namespace PaymentAPI
 {
@@ -36,7 +37,7 @@ namespace PaymentAPI
 
             services.AddDbContext<PaymentDetailContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DevConnection")));
-
+            services.AddScoped<IPaymentDetailService, PaymentDetailService>();
             services.AddCors();
         }
 
