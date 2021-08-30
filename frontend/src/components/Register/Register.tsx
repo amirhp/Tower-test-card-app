@@ -110,7 +110,7 @@ const Register: React.FC<RegisterProps> = ({
                 <Grid
                   container
                   direction="row"
-                  justify="flex-start"
+                  justify="flex-end"
                   alignItems="center"
                   spacing={2}
                 >
