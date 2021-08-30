@@ -24,18 +24,13 @@ describe('Register Component', () => {
     expect(getByTestId('input-cvc')).toBeTruthy()
   })
 
-  it('should render cvc field', () => {
+  it('should render expiry field', () => {
     const { getByTestId } = renderRegisterForm()
 
     expect(getByTestId('input-expiryDate')).toBeTruthy()
   })
 
-  it('should render submit button', () => {
-    const { getByText } = renderRegisterForm()
-    console.log(getByText);
-    expect(getByText('Submit')).toBeTruthy()
-  })
-
+ 
 })
 
 
