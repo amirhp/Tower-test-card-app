@@ -1,14 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data.Entity;
+using Microsoft.EntityFrameworkCore;
+using PaymentAPI.Service;
+using System.Threading.Tasks;
+using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
 namespace PaymentAPI.Models
 {
-    public class PaymentDetailContext:DbContext
+    public class PaymentDetailContext:DbContext , IContext
     {
         public PaymentDetailContext(DbContextOptions<PaymentDetailContext> options):base(options)
         {
 
         }
 
-        public DbSet<PaymentDetail> PaymentDetails { get; set; }
+        public IDbSet<PaymentDetail> PaymentDetail { get; set; }
+
+        public Task SaveAsyncChanges()
+        {
+            return base.SaveChangesAsync();
+        }
     }
 }

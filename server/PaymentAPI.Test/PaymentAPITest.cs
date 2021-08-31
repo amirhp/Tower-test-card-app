@@ -11,7 +11,7 @@ namespace PaymentAPI.Test
     public class PaymentAPITest
     {
         [Fact]
-        public async System.Threading.Tasks.Task Should_Return_Same_IdAsync()
+        public async Task Should_Return_Same_IdAsync()
         {
             // Arrange
             var mockRepository = new Mock<IPaymentDetailService>();
